@@ -6,7 +6,9 @@ public class StringUtils {
 	public static final String REGISTER_USER = "INSERT INTO user"
 			+ "(username, firstName, lastName, userType, address, contactNumber, email, password)" 
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	
+	public static final String GET_ALL_USER = "SELECT * FROM user";
+    public static final String GET_LOGIN_USER  = "SELECT * FROM user WHERE username = ? AND password = ?";
+    
 	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user WHERE username = ?";
 	public static final String GET_CONTACT_NUMBER = "SELECT COUNT(*) FROM user WHERE contactNumber = ?";
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user WHERE email = ?";
@@ -44,5 +46,6 @@ public class StringUtils {
     // JSP route
     public static final String LOGIN_PAGE = "/pages/login.jsp";
     public static final String REGISTER_PAGE = "/pages/register.jsp";
+    public static final String CUSTOMER_HOME_PAGE = "/pages/home.jsp";
     // JSP route
 }

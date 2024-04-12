@@ -9,10 +9,18 @@
 </head>
 <body>
 	<div class = "container">
+	<%-- Display error message if it exists --%>
+	<%
+	String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+	if (errorMessage != null && !errorMessage.isEmpty()) {
+	%>
+	<p class="error-message"> <%=errorMessage%> </p>
+	<% 
+	}
+	%>
 
     <div class = "heading">
-      <h1>Unlock Exclusive <br>
-        Shopping 🛒 Access</h1>
+      <h1>Register Your Account</h1>
     </div>
     
     <div class = "forum">
@@ -54,7 +62,7 @@
           </div>
         </div>
 
-        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p>Already have an account? <a href="login.jsp">Login</a></p>
 
         <button class="register-button" type="submit">Register</button>
 

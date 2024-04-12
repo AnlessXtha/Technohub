@@ -66,17 +66,19 @@ public class RegisterServlet extends HttpServlet {
 				// .sendRedirect(request.getContextPath(),<path>) will provide the absolute path
 			} else if (result == 0) {
 				// Redirect to the same register page with form data mistake
-				String errorMessage = "Please correct the form data.";
 				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.ERROR_REGISTER_MESSAGE);
 				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
-				// getRequestDispatcher() is required to have absolute path in jsp pages.
 			}  
 			else {
 				// Redirect to the same register page with server error
-				String errorMessage = "An unexpect server error ocurred.";
 				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.SERVER_ERROR_MESSAGE);
 				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
 			}
+		} else {
+		    // Passwords don't match
+		    String errorMessage = "Passwords do not match.";
+		    request.setAttribute(StringUtils.ERROR_MESSAGE, errorMessage);
+		    request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
 		}
 		
 	}

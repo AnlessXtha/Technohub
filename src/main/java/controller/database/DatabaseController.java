@@ -81,4 +81,25 @@ public class DatabaseController {
 		 *  return List<student>
 		 */
 	}
+	
+	public int getUserInfo(String username, String password) {
+        try (Connection con = getConnection()) {
+            PreparedStatement st = con.prepareStatement(StringUtils.GET_LOGIN_USER);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                // User name and password match in the database
+                return 1;
+            } else {
+                // No matching record found
+                return 0;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace(); // Log the exception for debugging
+            return -1;
+        }
+    }
+
 }
