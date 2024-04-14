@@ -2,12 +2,15 @@ package util;
 
 public class StringUtils {
 	
+	public static final String PAGE_TITLE = "TechnoHub";
+	
 	// SQL Queries
 	public static final String REGISTER_USER = "INSERT INTO user"
 			+ "(username, firstName, lastName, userType, address, contactNumber, email, password)" 
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String GET_ALL_USER = "SELECT * FROM user";
-    public static final String GET_LOGIN_USER  = "SELECT * FROM user WHERE username = ? AND password = ?";
+    public static final String GET_LOGIN_USER  = "SELECT * FROM user WHERE username = ?";
+    public static final String CHECK_USERTYPE  = "SELECT * FROM user WHERE username = ?";
     
 	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user WHERE username = ?";
 	public static final String GET_CONTACT_NUMBER = "SELECT COUNT(*) FROM user WHERE contactNumber = ?";
@@ -47,5 +50,13 @@ public class StringUtils {
     public static final String LOGIN_PAGE = "/pages/login.jsp";
     public static final String REGISTER_PAGE = "/pages/register.jsp";
     public static final String CUSTOMER_HOME_PAGE = "/pages/home.jsp";
+    public static final String ADMIN_DASHBOARD_PAGE = "/pages/adminDashboard.jsp";
     // JSP route
+    
+	// Session and Cookies
+	public static final String USER = "user";
+	public static final String JSESSIONID = "JSESSIONID";
+	public static final String LOGIN = "Login";
+	public static final String LOGOUT = "Logout";
+	// Session and Cookies
 }

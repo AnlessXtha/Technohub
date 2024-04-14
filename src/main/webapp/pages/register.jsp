@@ -5,25 +5,34 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>TechnoHub</title>
+<link rel="stylesheet" type="text/css"
+	href="/TechnoHub/stylesheets/register.css" />
 </head>
 <body>
 	<div class = "container">
-	<%-- Display error message if it exists --%>
-	<%
-	String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
-	if (errorMessage != null && !errorMessage.isEmpty()) {
-	%>
-	<p class="error-message"> <%=errorMessage%> </p>
-	<% 
-	}
-	%>
-
-    <div class = "heading">
-      <h1>Register Your Account</h1>
+	
+    <div class="imgbox">
+      <img src="../resources/images/tempimg.jpg">
     </div>
+
+    <div class="regbox">
+      <div class="heading">
+      	<%-- Display error message if it exists --%>
+		<%
+		String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+		if (errorMessage != null && !errorMessage.isEmpty()) {
+		%>
+		<p class="error-message"> <%=errorMessage%> </p>
+		<% 
+		}
+		%>
+        <h1>Register</h1>
+        <p>Please complete to create your account.</p>
+      </div>
+      
     
-    <div class = "forum">
+    <div class = "form">
       <form action="/TechnoHub/RegisterServlet" method="post">
         
         <div style="display: flex;">
@@ -31,7 +40,7 @@
             <input id="firstName" name="firstName" type="text" placeholder="First Name" required />
           </div>
           <div class = "inputform">
-            <input id="lastName" name="lastName" type="text" placeholder="Last Name" required  />
+            <input id="lastName" name="lastName" type="text" placeholder="Last Name" required />
           </div>
         </div>
 

@@ -60,25 +60,39 @@ public class RegisterServlet extends HttpServlet {
 		if (password.equals(retypePassword)) {
 			int result = dbController.registerUser(userModel);
 			
-			if(result == 1) {
-				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE );
-				response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE); 
-				// .sendRedirect(request.getContextPath(),<path>) will provide the absolute path
-			} else if (result == 0) {
-				// Redirect to the same register page with form data mistake
+			switch(result) {
+			case 1 -> {
+				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
+				response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE);
+			}
+			case 0 -> {
 				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.ERROR_REGISTER_MESSAGE);
 				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
-			}  
-			else {
-				// Redirect to the same register page with server error
+			}
+			case -1 -> {
 				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.SERVER_ERROR_MESSAGE);
 				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
 			}
+			case -2 -> {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.USERNAME_ERROR_MESSAGE);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+			}
+			case -3 -> {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.EMAIL_ERROR_MESSAGE);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+			}
+			case -4 -> {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.PHONE_NUMBER_ERROR_MESSAGE);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+			}
+			default -> {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.SERVER_ERROR_MESSAGE);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+			}
+			}
 		} else {
-		    // Passwords don't match
-		    String errorMessage = "Passwords do not match.";
-		    request.setAttribute(StringUtils.ERROR_MESSAGE, errorMessage);
-		    request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+			request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.PASSWORD_UMNATCHED_ERROR_MESSAGE);
+			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
 		}
 		
 	}

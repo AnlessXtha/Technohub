@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.database.DatabaseController;
+import model.UserModel;
 import util.StringUtils;
 
 /**
@@ -37,14 +40,36 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		PrintWriter printOut = response.getWriter();
-		int loginResult = dbController.getUserInfo(userName, password);
 		
+		int loginResult = dbController.getUserInfo(userName, password);
+		System.out.println(loginResult);
+	    
+	    int userType = dbController.checkUserType(userName);
+	    System.out.println(userType);
+	    
 		if (loginResult == 1) {
-			request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
-			response.sendRedirect(request.getContextPath() + StringUtils.CUSTOMER_HOME_PAGE);
+			
+			//Login Successful
+			HttpSession userSession = request.getSession();
+			userSession.setAttribute("userName", userName);
+			userSession.setMaxInactiveInterval(30*60);
+			
+			Cookie userCookie = new Cookie("user", userName);
+			userCookie.setMaxAge(30*60);
+			response.addCookie(userCookie);
+			
+			if (userType == 0) {
+				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
+				response.sendRedirect(request.getContextPath() + StringUtils.CUSTOMER_HOME_PAGE);
+		    } else if (userType == 1) {
+		    	request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
+				response.sendRedirect(request.getContextPath() + StringUtils.ADMIN_DASHBOARD_PAGE);
+		    }		
+			
 		} else if (loginResult == 0) {
 			printOut.println("<h1>Please enter the valid login creditaionals! </h1>");
-		}}
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

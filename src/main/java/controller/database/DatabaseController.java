@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.PasswordEncryptionWithAes;
 //import model.PasswordEncryptionWithAes;
 import model.UserModel;
 import util.StringUtils;
@@ -62,8 +63,8 @@ public class DatabaseController {
 			st.setString(5, userModel.getAddress ());
 			st.setString(6, userModel.getContactNumber());
 			st.setString(7, userModel.getEmail());
-			st.setString(8, userModel.getPassword());
-			// st.setString(9, PasswordEncryptionWithAes.encrypt(userModel.getUsername(), userModel.getPassword()));
+//			st.setString(8, userModel.getPassword());
+			 st.setString(8, PasswordEncryptionWithAes.encrypt(userModel.getUsername(), userModel.getPassword()));
 			
 			int result = st.executeUpdate();
 			return result > 0 ? 1: 0;
@@ -86,12 +87,20 @@ public class DatabaseController {
         try (Connection con = getConnection()) {
             PreparedStatement st = con.prepareStatement(StringUtils.GET_LOGIN_USER);
             st.setString(1, username);
-            st.setString(2, password);
-            ResultSet rs = st.executeQuery();
+//            st.setString(2, password);
+            ResultSet result = st.executeQuery();
 
-            if (rs.next()) {
+            if (result.next()) {
                 // User name and password match in the database
-                return 1;
+            	String userDb = result.getString("username");
+				String passwordDb = result.getString("password");
+				String decryptedPwd = PasswordEncryptionWithAes.decrypt(passwordDb, username);
+				
+				if (decryptedPwd != null && userDb.equals(username) && decryptedPwd.equals(password)) {
+					return 1;
+				}else {
+					return -2;
+				}
             } else {
                 // No matching record found
                 return 0;
@@ -101,5 +110,33 @@ public class DatabaseController {
             return -1;
         }
     }
+	
+	public int checkUserType(String username) {
+		try (Connection con = getConnection()) {
+			PreparedStatement checkUserTypeUT = con.prepareStatement(StringUtils.CHECK_USERTYPE);
+			checkUserTypeUT.setString(1,username);
+//			checkUserTypeUT.setString(1, userModel.getUsername());
+			ResultSet checkedUserTypeRs = checkUserTypeUT.executeQuery();
+			
+			if(checkedUserTypeRs.next()) {
+				String userDb = checkedUserTypeRs.getString("username");
+				String userTypeDb = checkedUserTypeRs.getString("userType");
+				System.out.println(userDb);
+				System.out.println(userTypeDb);
+				if ("CUSTOMER".equals(userTypeDb)) {
+					return 0; // Customer
+				} else {
+					return 1; // Admin
+				}
+			} else {
+	            // No user found with the given username
+	            return -2;
+	        }
+			
+		}catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace (); // Log the exception for debugging
+			return -1;
+		}
+	}
 
 }

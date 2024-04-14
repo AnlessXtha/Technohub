@@ -8,7 +8,7 @@
 </head>
 <body>
      <div class = "heading">
-      <h1>Welcome to the home page</h1>
+      <h1>Welcome to the Customer Home page</h1>
     </div>
 </body>
 </html>
