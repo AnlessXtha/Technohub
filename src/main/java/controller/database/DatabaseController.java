@@ -6,8 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.PasswordEncryptionWithAes;
+import model.ProductModel;
+import model.ProductModel;
 //import model.PasswordEncryptionWithAes;
 import model.UserModel;
 import util.StringUtils;
@@ -79,7 +82,7 @@ public class DatabaseController {
 		 * ---> Prepared Statement
 		 *  query
 		 *  execute
-		 *  return List<student>
+		 *  return List<product>
 		 */
 	}
 	
@@ -138,5 +141,54 @@ public class DatabaseController {
 			return -1;
 		}
 	}
+	
+	// Products
+	
+	public int addProduct (ProductModel productModel) {
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement (StringUtils.ADD_PRODUCT);
+			
+			st.setString(1, productModel.getProductName());
+			st.setString(2, productModel.getProductDescription());
+			st.setString(3, productModel.getProductCategory());
+			st.setInt(4, productModel.getStock());
+			st.setInt(5, productModel.getUnitPrice());
+			st.setString(6, productModel.getProductImageUrlFromPart());
+			
+			int result = st.executeUpdate();
+			return result > 0 ? 1: 0;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace (); 
+			return -1;
+		}
+	}
+	
+	public ArrayList<ProductModel> getAllProductsInfo(){
+		try (Connection con = getConnection()) {
+			PreparedStatement stmt = con.prepareStatement(StringUtils.GET_ALL_PRODUCTS);
+			ResultSet result = stmt.executeQuery();
+			
+			ArrayList<ProductModel> products = new ArrayList<ProductModel>();
+			
+			while(result.next()) {
+				ProductModel product = new ProductModel();
+				product.setProductID(result.getInt("productID"));
+				product.setProductName(result.getString("productName"));
+				product.setProductDescription(result.getString("productDescription"));
+				product.setProductCategory(result.getString("productCategory"));
+				product.setStock(result.getInt("stock"));
+				product.setUnitPrice(result.getInt("unitPrice"));
+				product.setProductImageUrlFromPart(result.getString("productImage"));
+				
+				
+				products.add(product);
+			}
+			return products;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	 
 
 }

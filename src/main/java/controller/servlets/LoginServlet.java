@@ -18,7 +18,7 @@ import util.StringUtils;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/LoginServlet" })
+@WebServlet(asyncSupported = true, urlPatterns = { StringUtils.SERVLET_URL_LOGIN })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

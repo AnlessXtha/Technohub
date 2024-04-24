@@ -1,10 +1,17 @@
 package util;
 
+import java.io.File;
+
 public class StringUtils {
 	
 	public static final String PAGE_TITLE = "TechnoHub";
 	
-	// SQL Queries
+	public static final String IMAGE_DIR_PRODUCT = "Users\\Windows 10\\eclipse-workspace\\Technohub\\src\\main\\webapp\\resources\\images\\products\\";
+	public static final String IMAGE_DIR_SAVE_PATH = "C:" + File.separator + IMAGE_DIR_PRODUCT;
+	
+	// Start SQL Queries
+	
+	// For User
 	public static final String REGISTER_USER = "INSERT INTO user"
 			+ "(username, firstName, lastName, userType, address, contactNumber, email, password)" 
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -12,11 +19,21 @@ public class StringUtils {
     public static final String GET_LOGIN_USER  = "SELECT * FROM user WHERE username = ?";
     public static final String CHECK_USERTYPE  = "SELECT * FROM user WHERE username = ?";
     
+    // User Validation
 	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user WHERE username = ?";
 	public static final String GET_CONTACT_NUMBER = "SELECT COUNT(*) FROM user WHERE contactNumber = ?";
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user WHERE email = ?";
 	
-	// SQL Queries
+	// For Products
+	public static final String ADD_PRODUCT = "INSERT INTO products"
+			+ "(productName, productDescription, productCategory, stock, unitPrice, productImage)" 
+			+ "VALUES (?, ?, ?, ?, ?, ?)";
+	
+	public static final String GET_ALL_PRODUCTS = "SELECT * FROM products";
+	
+	public static final String GET_SINGLE_PRODUCT = "SELECT * FROM products WHERE productID = ?";
+	
+	// End SQL Queries
 	
 	// Common Variables
 	public static final String USER_NAME= "username";
@@ -30,7 +47,7 @@ public class StringUtils {
 	public static final String RETYPE_PASSWORD= "retypePassword";
 	// Common Variables
 	
-	// enum reserach
+	// enum research
 	
 	// Start Message
     public static final String SUCCESS_REGISTER_MESSAGE = "Sucessfully Registered";
@@ -51,7 +68,20 @@ public class StringUtils {
     public static final String REGISTER_PAGE = "/pages/register.jsp";
     public static final String CUSTOMER_HOME_PAGE = "/pages/home.jsp";
     public static final String ADMIN_DASHBOARD_PAGE = "/pages/adminDashboard.jsp";
+    public static final String ADD_PRODUCT_PAGE = "/pages/addProduct.jsp";
     // JSP route
+    
+    // Start Servlet Route
+    public static final String SERVLET_URL_REGISTER = "/RegisterServlet";
+    
+    public static final String SERVLET_URL_LOGIN = "/LoginServlet";
+ 
+    public static final String SERVLET_URL_LOGOUT = "/LogoutServlet";
+    
+    public static final String SERVLET_URL_ADDPRODUCT = "/AddProductServlet";
+    
+    public static final String SERVLET_URL_PRODUCTLIST = "/ProductListServlet";
+    // End Servlet Route
     
 	// Session and Cookies
 	public static final String USER = "user";

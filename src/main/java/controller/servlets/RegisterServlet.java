@@ -16,7 +16,7 @@ import util.StringUtils;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/RegisterServlet" })
+@WebServlet(asyncSupported = true, urlPatterns = { StringUtils.SERVLET_URL_REGISTER })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

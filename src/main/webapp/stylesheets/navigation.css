@@ -1,0 +1,88 @@
+@charset "ISO-8859-1";
+
+*{
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+nav{
+  margin: auto;
+  padding: auto;
+  background-color: #8CB59C;
+  padding: 10px 50px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLinks{
+  float: left;
+  margin: 5px;
+  padding: 10px 20px 10px;
+  color: #111;
+  transition: 0.2s;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.navLinks:hover{
+  background: #7a9e87;
+}
+
+.navLinks:active{
+  background: #678672;
+}
+
+.searchbar input{
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.topRight{
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropcontent {
+  display: none;
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.dropcontent a {
+  color: #000000;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropcontent a:hover {
+  background-color: #e0dfdf;
+  border-radius: 10px;
+}
+
+.dropdown:hover .dropcontent {
+  display: block;
+}
+
+.log-button {
+	margin-left: 10px;
+	padding: 10px;
+	border-radius: 5px
+}
