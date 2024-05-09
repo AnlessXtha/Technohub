@@ -1,6 +1,13 @@
 <%@page import="util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="javax.servlet.http.HttpServletResponse" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+    String contextPath = request.getContextPath();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,192 +65,47 @@
 
       </div>
     </nav>
+    
+    
+	<div class = top>
+      <div class="searchbar">
+        
+        <input type="text" placeholder="Search" />
+        <button style="background-color: #FFF; cursor: pointer; border: none; outline: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#657789" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      </div>
+    </div>
+    
+    
+    <section class="products" id="products">
+      <!--Latest Product Heading-->
+      <h1 class="heading">Our Products</h1>
 	
-    <section class="products" id="products">
-      <!--Latest Product Heading-->
-      <h1 class="heading">Recently Added</h1>
-
       <div class="box-container">
-
+		<c:forEach var="product" items="${productsListCustomer}">
         <!--1st Product-->
         <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg" ></a>
-          <h3>Boxwood</h3>
-          <p>Boxwood prefer shady areas, out of the hot afternoon sun.</p>
-          <div class="price">$27.99 <span style="text-decoration: line-through;"> $34.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
+          <a href="pages/learnmore.html"><img src="${pageContext.request.contextPath}/resources/images/products/${product.productImageUrlFromPart}" style="width:225px; height:225px"/></a>
+          <h3>${product.productName}</h3>
+          <p>${product.productDescription}</p>
+          <div class="price">Rs. ${product.unitPrice}</div>
+          <form  method="get" action="<%=contextPath + StringUtils.SERVLET_URL_SINGLE_PRODUCT%>">
+	                 <input type="hidden" name="<%=StringUtils.UPDATE_ID %>" value="${product.productID}" />
+	                 <button type="submit">Learn More </button>
+	              </form>
           <div class="description">
-            <span> BUXUS </span>
-            <span> Broadleaf </span>
           </div>
-        </div>
-
-        <!--2nd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Azalea</h3>
-          <p>Azaleas prefer outdoor conditions in areas with semi-shade.</p>
-          <div class="price">$42.99 <span style="text-decoration: line-through;"> $49.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> FICUS RETUSA OR GINSENG </span>
-            <span> Broadleaf </span>
-          </div>
-        </div>
-
-        <!--3rd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
-
-        <!--4th Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
+		</div>
+		
+        </c:forEach>
+      </div>
     </section>
 
 
-    <section class="products" id="products">
-      <!--Latest Product Heading-->
-      <h1 class="heading">Popular Items</h1>
-
-      <div class="box-container">
-
-        <!--1st Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg" ></a>
-          <h3>Boxwood</h3>
-          <p>Boxwood prefer shady areas, out of the hot afternoon sun.</p>
-          <div class="price">$27.99 <span style="text-decoration: line-through;"> $34.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> BUXUS </span>
-            <span> Broadleaf </span>
-          </div>
-        </div>
-
-        <!--2nd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Azalea</h3>
-          <p>Azaleas prefer outdoor conditions in areas with semi-shade.</p>
-          <div class="price">$42.99 <span style="text-decoration: line-through;"> $49.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> FICUS RETUSA OR GINSENG </span>
-            <span> Broadleaf </span>
-          </div>
-        </div>
-
-        <!--3rd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
-
-        <!--4th Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
-    </section>
+    
 
 
-
-
-    <section class="products" id="products">
-      <!--Latest Product Heading-->
-      <h1 class="heading">For You</h1>
-
-      <div class="box-container">
-
-        <!--1st Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg" ></a>
-          <h3>Boxwood</h3>
-          <p>Boxwood prefer shady areas, out of the hot afternoon sun.</p>
-          <div class="price">$27.99 <span style="text-decoration: line-through;"> $34.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> BUXUS </span>
-            <span> Broadleaf </span>
-          </div>
-        </div>
-
-        <!--2nd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Azalea</h3>
-          <p>Azaleas prefer outdoor conditions in areas with semi-shade.</p>
-          <div class="price">$42.99 <span style="text-decoration: line-through;"> $49.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> FICUS RETUSA OR GINSENG </span>
-            <span> Broadleaf </span>
-          </div>
-        </div>
-
-        <!--3rd Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
-
-        <!--4th Product-->
-        <div class="col-3">
-          <a href="pages/learnmore.html"><img src="images/Cherry01-Sakura-Japan.jpg"></a>
-          <h3>Cherry</h3>
-          <p>Cherry prefer the cool temperatures of winter and the warmth of spring.</p>
-          <div class="price">$55.99 <span style="text-decoration: line-through;"> $69.99</span></div>
-          <a href="pages/learnmore.html"><button class="btn">Learn More</button></a>
-          <div class="description">
-            <span> PRUNUS, SAKURA</span>
-            <span> Deciduous </span>
-          </div>
-        </div>
-    </section>
-
-
-
-    <!-- footer section starts -->
-    <!-- <footer class = "footer">
+  <!-- footer section starts -->
+    <footer class = "footer">
       division class seperated for logo
       <div class="column1">
         <img src = "../images/technohublogo.png" style = "height: 50px;">
@@ -272,7 +134,6 @@
         </div>
       </div>
     </footer>
- -->
 
 
 

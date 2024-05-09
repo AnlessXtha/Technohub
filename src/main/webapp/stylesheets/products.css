@@ -1,5 +1,47 @@
 @charset "ISO-8859-1";
 
+
+.btn{
+  background-color: green; 
+  border: none;
+  color: white;
+  padding: 13px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+
+/* Search Bar*/
+
+.searchbar{
+  display: flex;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-left: 33%;
+  margin-right: 35%;
+  border: #111 solid 1px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbar input{
+  padding: 15px;
+  width: 400px;
+  border: none;
+  outline: none;
+}
+
+
+
+/* product page */
+
 .col-3{
   box-shadow: 0 8px 24px rgba(0,0,0,.1);
   border-radius: 8px;
@@ -58,8 +100,11 @@
   margin-left: 0.5cm;       
   margin-right: 0.5cm;
 }
-
 /* product page css end */
+
+
+
+
 /* box*/
 .products .heading{ 
   margin-top: 40px;
@@ -114,4 +159,51 @@
   color: #111;
   font-weight: lighter;
   text-decoration: line-through;
+}
+/*product*/
+
+
+
+.footer{
+  margin-top: 50px;
+  width: 100%;
+  padding: 50px 100px;
+  background: #333;
+  color: #efefef;
+  display: flex;
+}
+
+.footer div{
+  text-align: center;
+}
+
+.column2{
+  flex-grow: 2;
+}
+
+.footer div h3{
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.newsletter input{
+  width: 400px;
+  height: 45px;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  outline: none;
+  border: none;
+}
+
+.newsletter button{
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 15px;
+  cursor: pointer;
 }

@@ -59,7 +59,7 @@ String contextPath = request.getContextPath();
     <h1>Update Product</h1>
     <form action="${pageContext.request.contextPath}/ModifyServlet" method="post" enctype="multipart/form-data">
         <!-- Hidden input field for productId -->
-        <input type="hidden" name="productId" value="${product.productID}">
+        <input type="hidden" id="updateID" name="updateID" value="${product.productID}">
         
         <div class="form-group">
             <label for="productName">Product Name:</label>

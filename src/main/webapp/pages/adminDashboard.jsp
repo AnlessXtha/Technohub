@@ -113,7 +113,7 @@
 	              </form>
 					<form id="deleteForm-${product.productName}" method="post" 
 	                    action="${pageContext.request.contextPath}/ModifyServlet">
-	                    <input type="hidden" name="deleteId" value="${product.productName}" />
+	                    <input type="hidden" name="<%=StringUtils.DELETE_ID %>" value="${product.productName}" />
 	                    <button type="button"
 	                        onclick="confirmDelete('${product.productName}')">Delete</button>
 	                </form>

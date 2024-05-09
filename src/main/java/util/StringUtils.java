@@ -52,9 +52,50 @@ public class StringUtils {
             "    productID = ?;";
 	
     public static final String DELETE_PRODUCT = "DELETE FROM products WHERE productName = ?";
-
+    
+    // Cart
+    
+    public static final String GET_ALL_PRODUCTS_FROM_CART = 
+    	    "SELECT " +
+    	    "	 cpd.cartID," +
+    	    "	 cpd.productID," +
+    	    "    p.productName," +
+    	    "    p.productImage," +
+    	    "    p.unitPrice," +
+    	    "    cpd.cartProductQuantity," +
+    	    "    cpd.cartLineTotal " +
+    	    "FROM " +
+    	    "    cartproductdetails cpd " +
+    	    "JOIN " +
+    	    "    products p ON cpd.productID = p.productID " +
+    	    "WHERE " +
+    	    "    cpd.cartID = ?";
+       
+    public static final String REMOVE_PRODUCT_FROM_CART = "DELETE FROM cartproductdetails WHERE productID = ?";
 	
-	// End SQL Queries
+    // For Orders
+    
+    public static final String GET_ALL_ORDERS_FOR_USER = 
+    	    "SELECT " +
+    	    "    o.orderID, " +
+    	    "    o.orderDate, " +
+    	    "    o.orderStatus, " +
+    	    "    p.productName, " +
+    	    "    p.productImage, " +
+    	    "    od.orderQuantity, " +
+    	    "    od.lineTotal, " +
+    	    "    o.orderTotal " +
+    	    "FROM " +
+    	    "    orders o " +
+    	    "JOIN " +
+    	    "    orderproductdetails od ON o.orderID = od.orderID " +
+    	    "JOIN " +
+    	    "    products p ON od.productID = p.productID " +
+    	    "WHERE " +
+    	    "    o.username = ?";
+
+    
+    // End SQL Queries
 	
 	// Common Variables
 	public static final String USER_NAME= "username";
@@ -94,8 +135,14 @@ public class StringUtils {
     public static final String ADMIN_DASHBOARD_PAGE = "/pages/adminDashboard.jsp";
     public static final String ADD_PRODUCT_PAGE = "/pages/addProduct.jsp";
     
+    public static final String HOME_LIST_PAGE = "/pages/home.jsp";
+    public static final String PRODUCTS_PAGE = "/pages/products.jsp";
+    public static final String SINGLE_PRODUCT_PAGE = "/pages/singleProductPage.jsp";
+    
     public static final String USER_PROFILE_PAGE = "/pages/userProfile.jsp";
     public static final String EDIT_USER_PROFILE_PAGE = "/pages/editProfile.jsp";
+    public static final String CART_PAGE = "/pages/cart.jsp";
+    public static final String HISTORY_PAGE = "/pages/history.jsp";
     
     public static final String UPDATE_PAGE = "/pages/updateProduct.jsp";
     
@@ -123,11 +170,21 @@ public class StringUtils {
     
     public static final String SERVLET_URL_PRODUCTLIST = "/ProductListServlet";
     
+    public static final String SERVLET_URL_SINGLE_PRODUCT = "/SingleProductServlet";
+    
+    public static final String SERVLET_URL_HOME_LIST_PAGE = "/HomeListServlet";
+    
+    public static final String SERVLET_URL_PRODUCTLISTCUSTOMER = "/ProductListCustomerServlet";
+    
     public static final String SERVLET_URL_USERPROFILE= "/UserProfileServlet";
 
     public static final String SERVLET_URL_EDITPROFILE= "/EditProfileServlet";
     
     public static final String SERVLET_URL_UPDATE = "/ModifyServlet";
+    
+    public static final String SERVLET_URL_CARTDETAILS = "/CartDetailsServlet";
+    
+    public static final String SERVLET_URL_MODIFYCART = "/ModifyCartServlet";
     
     // End Servlet Route
     
@@ -138,5 +195,7 @@ public class StringUtils {
 	public static final String LOGOUT = "Logout";
 	
 	public static final String UPDATE_ID= "updateID";
+	public static final String DELETE_ID= "deleteID";
+	public static final String REMOVE_ID= "removeID";
 	// Session and Cookies
 }

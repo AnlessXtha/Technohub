@@ -24,6 +24,7 @@ maxFileSize = 1024 * 1024 * 10,
 maxRequestSize = 1024 * 1024 * 50) 
 public class ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	DatabaseController databaseController= new DatabaseController(); 
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,8 +52,8 @@ public class ModifyServlet extends HttpServlet {
 			throws ServletException, IOException {
     	System.out.println("put triggered in do post modify");
     	
-		String updateId = request.getParameter("updateId");
-		String deleteId = request.getParameter("deleteId");
+		String updateId = request.getParameter(StringUtils.UPDATE_ID);
+		String deleteId = request.getParameter(StringUtils.DELETE_ID);
 		
     	if (updateId != null && !updateId.isEmpty()) {
 			doPut(request, response);
@@ -67,7 +68,7 @@ public class ModifyServlet extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("put triggered");
-		String productID = request.getParameter("productId");
+		String productID = request.getParameter("updateID");
 		int productId = Integer.parseInt(productID);
 		String productName = request.getParameter("productName");
 		String productDescription = request.getParameter("productDescription");

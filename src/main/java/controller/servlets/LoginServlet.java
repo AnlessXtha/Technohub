@@ -47,12 +47,15 @@ public class LoginServlet extends HttpServlet {
 	    int userType = dbController.checkUserType(userName);
 	    System.out.println(userType);
 	    
+	    int cartID = dbController.getCurrentCartID(userName);
+	    
 		if (loginResult == 1) {
 			
 			//Login Successful
 			HttpSession userSession = request.getSession();
 			userSession.setAttribute("userName", userName);
 			userSession.setAttribute("userType", userType);
+			userSession.setAttribute("cartID", cartID);
 			userSession.setMaxInactiveInterval(30*60);
 			
 			Cookie userNameCookie = new Cookie("username", userName);
@@ -71,6 +74,10 @@ public class LoginServlet extends HttpServlet {
 			    userTypeCookie.setMaxAge(30*60);
 			    response.addCookie(userTypeCookie);
 			}
+			
+			Cookie userCartIDCookie = new Cookie("cartID", String.valueOf(cartID));
+			userCartIDCookie.setMaxAge(30*60);
+			response.addCookie(userCartIDCookie);
 			
 			if (userType == 0) {
 				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
