@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%String contextPath = request.getContextPath();%>
 
 <!DOCTYPE html>
 <html>
@@ -31,11 +32,11 @@
     <nav>
       <div class="navbar">
         <div class="navLogo">
-          <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="./pages/adminDashboard.jsp" class="navLinks">Dashboard</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
           <a href="#" class="navLinks">Products</a>
           <a href="#" class="navLinks">Contact Us</a>
         </div>
@@ -103,11 +104,28 @@
 	          <td>${product.stock}</td>
 	          <td>Rs. ${product.unitPrice}</td>
 	          <td>
-	          	<img src="${pageContext.request.contextPath}/resources/images/products/${product.productImageUrlFromPart}" />
+	          	<img src="${pageContext.request.contextPath}/resources/images/products/${product.productImageUrlFromPart}" style="width:225px; height:225px"/>
 	          </td>
-	          <td><i class="fa fa-edit" ></i>
-	                            <i class="fa fa-trash" ></i></td>
+	          <td>
+		          <form id="updateForm-${product.productName}" method="get" action="<%=contextPath + StringUtils.SERVLET_URL_UPDATE%>">
+	                 <input type="hidden" name="<%=StringUtils.UPDATE_ID %>" value="${product.productID}" />
+	                 <button type="submit">Update</button>
+	              </form>
+					<form id="deleteForm-${product.productName}" method="post" 
+	                    action="${pageContext.request.contextPath}/ModifyServlet">
+	                    <input type="hidden" name="deleteId" value="${product.productName}" />
+	                    <button type="button"
+	                        onclick="confirmDelete('${product.productName}')">Delete</button>
+	                </form>
+				</td>
 	        </tr>
+	        <%-- <c:if test="${userType.rows[0].role == 'admin'}">
+
+                <form method="post">
+                    <input type="hidden" name="deleteId" value="${user.userName}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </c:if> --%>
         </c:forEach>
         <!-- <tr>
           <td>1</td>
@@ -188,4 +206,14 @@
     </div>
 	
 </body>
+
+<script>
+    function confirmDelete(productName) {
+        if (confirm("Are you sure you want to delete this product: " + productName
+                + "?")) {
+            document.getElementById("deleteForm-" + productName).submit();
+        }
+    }
+</script>
+
 </html>

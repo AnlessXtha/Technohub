@@ -1,8 +1,16 @@
 package model;
 
+import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserModel {
+import javax.servlet.http.Part;
+
+import util.StringUtils;
+
+public class UserModel implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	
 	private String firstName;
 	private String lastName;
@@ -12,9 +20,14 @@ public class UserModel {
 	private String email;
 	private String username;
 	private String password;
+	private String userImageUrlFromPart;
+	
+	public UserModel() {
+		
+	}
 	
 	public UserModel(String firstName, String lastName, String userType, String address, String contactNumber,
-			String email, String username, String password) {
+			String email, String username, String password, Part userImagePart) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -24,6 +37,7 @@ public class UserModel {
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.userImageUrlFromPart = getUserImageUrl(userImagePart);
 	}
 
 	public String getFirstName() {
@@ -90,6 +104,32 @@ public class UserModel {
 		this.password = password;
 	}
 	
-	
+	public String getUserImageUrlFromPart() {
+		return userImageUrlFromPart;
+	}
+
+	public void setUserImageUrlFromPart(String userImageUrlFromPart) {
+		this.userImageUrlFromPart = userImageUrlFromPart;
+	}
+
+	private String getUserImageUrl(Part part) {
+		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH_USER;
+		File fileSaveDir = new File(savePath);
+		String userImageUrlFromPart = null;
+		if (!fileSaveDir.exists()) {
+			fileSaveDir.mkdir();
+		}
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				userImageUrlFromPart = s.substring(s.indexOf("=") + 2, s.length() - 1);
+			}
+		}
+		if (userImageUrlFromPart == null || userImageUrlFromPart.isEmpty()) {
+			userImageUrlFromPart = "download.jpg";
+		}
+		return userImageUrlFromPart;
+	}
 
 }

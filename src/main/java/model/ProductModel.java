@@ -94,7 +94,7 @@ public class ProductModel implements Serializable {
 	}
 	
 	private String getProductImageUrl(Part part) {
-		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
+		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH_PRODUCT;
 		File fileSaveDir = new File(savePath);
 		String productImageUrlFromPart = null;
 		if (!fileSaveDir.exists()) {

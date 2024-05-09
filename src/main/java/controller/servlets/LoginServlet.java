@@ -52,18 +52,32 @@ public class LoginServlet extends HttpServlet {
 			//Login Successful
 			HttpSession userSession = request.getSession();
 			userSession.setAttribute("userName", userName);
+			userSession.setAttribute("userType", userType);
 			userSession.setMaxInactiveInterval(30*60);
 			
-			Cookie userCookie = new Cookie("user", userName);
-			userCookie.setMaxAge(30*60);
-			response.addCookie(userCookie);
+			Cookie userNameCookie = new Cookie("username", userName);
+			userNameCookie.setMaxAge(30*60);
+			response.addCookie(userNameCookie);
+			
+			Cookie userTypeCookie = null;
+			
+			if (userType == 0) {
+				 userTypeCookie = new Cookie("userType", "Customer");
+			} else if (userType == 1) {
+				 userTypeCookie = new Cookie("userType", "Admin");
+			}
+			
+			if (userTypeCookie != null) {
+			    userTypeCookie.setMaxAge(30*60);
+			    response.addCookie(userTypeCookie);
+			}
 			
 			if (userType == 0) {
 				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
 				response.sendRedirect(request.getContextPath() + StringUtils.CUSTOMER_HOME_PAGE);
 		    } else if (userType == 1) {
 		    	request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
-				response.sendRedirect(request.getContextPath() + StringUtils.ADMIN_DASHBOARD_PAGE);
+				response.sendRedirect(request.getContextPath() + StringUtils.SERVLET_URL_PRODUCTLIST);
 		    }		
 			
 		} else if (loginResult == 0) {

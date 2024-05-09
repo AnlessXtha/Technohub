@@ -67,7 +67,8 @@ public class DatabaseController {
 			st.setString(6, userModel.getContactNumber());
 			st.setString(7, userModel.getEmail());
 //			st.setString(8, userModel.getPassword());
-			 st.setString(8, PasswordEncryptionWithAes.encrypt(userModel.getUsername(), userModel.getPassword()));
+			st.setString(8, PasswordEncryptionWithAes.encrypt(userModel.getUsername(), userModel.getPassword()));
+			st.setString(9, userModel.getUserImageUrlFromPart());
 			
 			int result = st.executeUpdate();
 			return result > 0 ? 1: 0;
@@ -113,6 +114,34 @@ public class DatabaseController {
             return -1;
         }
     }
+	
+	public UserModel getCurrentUserInfoByUserName(String username){
+		try (Connection con = getConnection()) {
+			PreparedStatement stmt = con.prepareStatement(StringUtils.GET_SINGLE_USER_INFO);
+			stmt.setString(1, username);
+			ResultSet result = stmt.executeQuery();
+			
+			UserModel user = new UserModel();
+
+			if(result.next()) {
+				user.setFirstName(result.getString("firstName"));
+				user.setLastName(result.getString("lastName"));
+				user.setUserType(result.getString("userType"));
+				user.setAddress(result.getString("address"));
+				user.setContactNumber(result.getString("contactNumber"));
+				user.setEmail(result.getString("email"));
+				user.setUsername(result.getString("username"));
+				user.setPassword(result.getString("password"));
+				user.setUserImageUrlFromPart(result.getString("userImage"));
+			}
+			return user;
+
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}	 
+
 	
 	public int checkUserType(String username) {
 		try (Connection con = getConnection()) {
@@ -189,6 +218,65 @@ public class DatabaseController {
 			return null;
 		}
 	}
+	
+	public ProductModel getCurrentProductInfo(int productID){
+		try (Connection con = getConnection()) {
+			PreparedStatement stmt = con.prepareStatement(StringUtils.GET_ID_PRODUCTS);
+			stmt.setInt(1, productID);
+			ResultSet result = stmt.executeQuery();
+			
+			
+			if(result.next()) {
+				ProductModel product = new ProductModel();
+				product.setProductID(result.getInt("productID"));
+				product.setProductName(result.getString("productName"));
+				product.setProductDescription(result.getString("productDescription"));
+				product.setProductCategory(result.getString("productCategory"));
+				product.setStock(result.getInt("stock"));
+				product.setUnitPrice(result.getInt("unitPrice"));
+				product.setProductImageUrlFromPart(result.getString("productImage"));
+				return product;
+			}
+			else {
+				return null;
+			}
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	//updating product in admin dashboard
+	public int updateProductInfo(ProductModel productModel,int productId) {
+		System.out.println("put triggered database");
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement(StringUtils.QUERY_UPDATE_PRODUCT);
+			st.setString(1, productModel.getProductName());
+			st.setString(2, productModel.getProductDescription());
+			st.setString(3, productModel.getProductCategory());
+			st.setInt(4, productModel.getStock());
+			st.setInt(5, productModel.getUnitPrice());
+			st.setString(6, productModel.getProductImageUrlFromPart());
+			st.setInt(7, productId);
+			int result = st.executeUpdate();
+			return result > 0 ? 1: 0;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace(); // Log the exception for debugging
+			return -1;
+		}
+	} 
+	
+	public int deleteProduct(String productName) {
+        try (Connection con = getConnection()) {
+            PreparedStatement st = con.prepareStatement(StringUtils.DELETE_PRODUCT);
+            st.setString(1, productName);
+            return st.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace(); // Log the exception for debugging
+            return -1;
+        }
+        
+    }
 	 
 
 }

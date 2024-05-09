@@ -33,7 +33,7 @@
       
     
     <div class = "form">
-      <form action="/TechnoHub/RegisterServlet" method="post">
+      <form action="/TechnoHub/RegisterServlet" method="post" enctype="multipart/form-data">
         
         <div style="display: flex;">
           <div class = "inputform">
@@ -69,6 +69,14 @@
           <div class = "inputform">
             <input id="retypePassword" name="retypePassword" type="password" placeholder="Retype Password" required  />
           </div>
+        </div>
+        
+         <div style="display: flex;">
+          <div class = "">
+          	<label for="userImage">Upload Image:</label>
+            <input style="width:auto; " id="userImage" name="userImage" type="file" accept="image/*"  required />
+          </div>
+          
         </div>
 
         <p>Already have an account? <a href="login.jsp">Login</a></p>
