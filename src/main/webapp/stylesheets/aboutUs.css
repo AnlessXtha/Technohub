@@ -1,0 +1,105 @@
+@charset "ISO-8859-1";
+
+
+.aboutus{
+        width: 100%;
+        padding: 30px 0px;
+        background-color: #ededed;
+      }
+      .AboutUsText{
+        width: 800px;
+        padding-left: 100px;
+        padding-right: 50px;
+      }
+      .main{
+        padding-left: 0px;
+        max-width: 95%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .AboutUsText h2{
+        max-width: 100%;
+        text-shadow: 5px 5px 5px black;
+        font-family: 'Pacifico', cursive;
+        color: #8CB59C;
+        font-size: 75px;
+        text-transform: capitalize;
+        margin-top: 2px;
+        padding: 0px 0px 0px 100px;
+      }
+      .AboutUsText p{
+        text-shadow: 1px 1px 1px #ababab;
+        letter-spacing: 1px;
+        line-height: 30px;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        width: 100%;
+      }
+        .AboutUsText h3{
+          text-shadow: 3px 3px 3px #ababab;
+        font-family: 'Pacifico', cursive;
+        color: #8CB59C;
+        font-size: 60px;
+        text-transform: capitalize;
+        margin-top: 50px;
+        }
+
+      .aboutus2{
+        width: 100%;
+        padding: 40px 0px;
+        background-color: #8CB59C;
+      }
+
+      .aboutus2 h2{
+        font-family: 'Pacifico', cursive;
+        text-shadow: 5px 5px 5px black;
+        color: #ededed;
+        font-size: 50px;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+        padding-top: 0px;
+        align-items: center;
+        display: flex;
+      }
+
+        .indi1{
+        background-color: #ededed;
+        width: 100%;
+      }
+      .indi1 h1{
+        font-family: 'Josefin Sans', sans-serif;
+        text-shadow: 2px 2px 2px black;
+        color: #8CB59C;
+        font-size: 30px;
+        text-transform: capitalize;
+        text-align: left;
+        width: 300px;
+      margin-bottom: 20px;
+      }
+      .indi1 img{
+      margin-top: 20px;
+      margin-bottom: 10px;
+        width: 165px;
+        height: 165px;
+        margin-left: 120px;
+        align-content: right;
+        justify-content: center;
+        border: #111 solid 3px;
+        
+      }
+      .indi1 p{
+        font-family: 'Josefin Sans', sans-serif;
+        text-shadow: 1px 1px 1px black;
+        letter-spacing: 1px;
+        line-height: 30px;
+        font-size: 20px;
+        margin-bottom: 40px;
+        margin-left: 50px;
+      }
+
+      span1{
+        font-weight: bold;
+      }

@@ -16,8 +16,8 @@ public class StringUtils {
 	
 	// For User
 	public static final String REGISTER_USER = "INSERT INTO user"
-			+ "(username, firstName, lastName, userType, address, contactNumber, email, password, userImage)" 
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "(username, firstName, lastName, userType, address, contactNumber, email, password)" 
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String GET_ALL_USER = "SELECT * FROM user";
     public static final String GET_LOGIN_USER  = "SELECT * FROM user WHERE username = ?";
     public static final String CHECK_USERTYPE  = "SELECT * FROM user WHERE username = ?";
@@ -138,6 +138,8 @@ public class StringUtils {
     public static final String HOME_LIST_PAGE = "/pages/home.jsp";
     public static final String PRODUCTS_PAGE = "/pages/products.jsp";
     public static final String SINGLE_PRODUCT_PAGE = "/pages/singleProductPage.jsp";
+    public static final String ABOUT_US_PAGE = "/pages/aboutUs.jsp";
+    public static final String CONTACT_US_PAGE = "/pages/contactUs.jsp";
     
     public static final String USER_PROFILE_PAGE = "/pages/userProfile.jsp";
     public static final String EDIT_USER_PROFILE_PAGE = "/pages/editProfile.jsp";
@@ -183,6 +185,8 @@ public class StringUtils {
     public static final String SERVLET_URL_UPDATE = "/ModifyServlet";
     
     public static final String SERVLET_URL_CARTDETAILS = "/CartDetailsServlet";
+    
+    public static final String SERVLET_URL_ORDERDETAILS = "/OrderDetailsServlet";
     
     public static final String SERVLET_URL_MODIFYCART = "/ModifyCartServlet";
     

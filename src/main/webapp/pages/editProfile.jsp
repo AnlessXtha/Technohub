@@ -55,7 +55,7 @@
 	<div class="container">
 
         <div class="profileimg">
-          <img src ="${pageContext.request.contextPath}/resources/images/users/amug.png" style="height: 100px;">
+          <img src ="${pageContext.request.contextPath}/resources/images/user.png" style="height: 100px;">
         </div>
         
         <form>

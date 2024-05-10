@@ -37,23 +37,20 @@
 
         <div class="navLinksContainer"> 
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
-          <a href="#" class="navLinks">Products</a>
-          <a href="#" class="navLinks">Contact Us</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.ABOUT_US_PAGE}" class="navLinks">About Us</a>
         </div>
 
 
         <div class="topRight">
-          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;"></i></a>
+          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;">
           <div class ="dropdown">
-            <p class="d" style="font-size: 12px;">Admin</p></a>
+            <p class="d" style="font-size: 12px;">Admin</p>
             <div class="dropcontent">
-              <a href="#">Profile</a>
-              <a href="#">Log Out</a>
+              <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_USERPROFILE}">Profile</a>
             </div>
           </div>
-			<%-- <a href="#">
-          <img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; padding-left: 10px; padding-top: 6px;"></i>
-          </a> --%>
+          
 			<form action= "/TechnoHub/LogoutServlet" method='post'>
 				<button type="submit" class="log-button">Log out</button>
 			</form>
@@ -119,44 +116,8 @@
 	                </form>
 				</td>
 	        </tr>
-	        <%-- <c:if test="${userType.rows[0].role == 'admin'}">
-
-                <form method="post">
-                    <input type="hidden" name="deleteId" value="${user.userName}" />
-                    <button type="submit">Delete</button>
-                </form>
-            </c:if> --%>
         </c:forEach>
-        <!-- <tr>
-          <td>1</td>
-          <td>Airpods</td>
-          <td>Wireless earphones</td>
-          <td>Headphones</td>
-          <td>Rs999</td>
-          <td>image</td>
-          <td><i class="fa fa-edit" ></i>
-                            <i class="fa fa-trash" ></i></td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Airpods</td>
-          <td>Wireless earphones</td>
-          <td>Headphones</td>
-          <td>Rs999</td>
-          <td>image</td>
-          <td><i class="fa fa-edit" ></i>
-                            <i class="fa fa-trash" ></i></td>
-        </tr>
-        <tr> 
-          <td>1</td>
-          <td>Airpods</td>
-          <td>Wireless earphones</td>
-          <td>Headphones</td>
-          <td>Rs999</td>
-          <td>image</td>
-          <td><i class="fa fa-edit" ></i>
-                            <i class="fa fa-trash" ></i></td>
-        </tr>   -->     
+	        
       </table>
       
       <h2 style="padding-top:50px">Orders</h2>

@@ -59,14 +59,8 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter(StringUtils.EMAIL);
 		String password = request.getParameter(StringUtils.PASSWORD);
 		String retypePassword = request.getParameter(StringUtils.RETYPE_PASSWORD);
-		Part userImagePart = request.getPart("userImage");
 		
-		UserModel userModel = new UserModel (firstName, lastName, userType, address, contactNumber, email, userName, password, userImagePart);
-		
-		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH_USER;
-	    String fileName = userModel.getUserImageUrlFromPart();
-	    if(!fileName.isEmpty() && fileName != null)
-	    	userImagePart.write(savePath + fileName);
+		UserModel userModel = new UserModel (firstName, lastName, userType, address, contactNumber, email, userName, password);
 		
 		if (password.equals(retypePassword)) {
 			int result = dbController.registerUser(userModel);

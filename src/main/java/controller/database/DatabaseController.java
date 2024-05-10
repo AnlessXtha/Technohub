@@ -26,36 +26,35 @@ public class DatabaseController {
 		String pass = "";
 		return DriverManager.getConnection(url, user, pass);
 	}
-
+	
 	public int registerUser(UserModel userModel) {
 
 		try (Connection con = getConnection()) {
 
-			// Validation
 			PreparedStatement checkedUsernameSt = con.prepareStatement(StringUtils.GET_USERNAME);
 			checkedUsernameSt.setString(1, userModel.getUsername());
 			ResultSet checkedUsernameRs = checkedUsernameSt.executeQuery();
 			checkedUsernameRs.next();
 			if (checkedUsernameRs.getInt(1) > 0) {
-				return -2; // Username already exists
+				return -2; 
 			}
 
-			// checking for existing email
+
 			PreparedStatement checkEmailSt = con.prepareStatement(StringUtils.GET_EMAIL);
 			checkEmailSt.setString(1, userModel.getEmail());
 			ResultSet checkEmailRs = checkEmailSt.executeQuery();
 			checkEmailRs.next();
 			if (checkEmailRs.getInt(1) > 0) {
-				return -3; // Email already exists
+				return -3;
 			}
 
-			// checking for existing phone number
+
 			PreparedStatement checkPhoneSt = con.prepareStatement(StringUtils.GET_CONTACT_NUMBER);
 			checkPhoneSt.setString(1, userModel.getContactNumber());
 			ResultSet checkPhoneRs = checkPhoneSt.executeQuery();
 			checkPhoneRs.next();
 			if (checkPhoneRs.getInt(1) > 0) {
-				return -4; // Phone number already exists
+				return -4; 
 			}
 
 			PreparedStatement st = con.prepareStatement(StringUtils.REGISTER_USER);
@@ -67,21 +66,15 @@ public class DatabaseController {
 			st.setString(5, userModel.getAddress());
 			st.setString(6, userModel.getContactNumber());
 			st.setString(7, userModel.getEmail());
-//			st.setString(8, userModel.getPassword());
 			st.setString(8, PasswordEncryptionWithAes.encrypt(userModel.getUsername(), userModel.getPassword()));
-			st.setString(9, userModel.getUserImageUrlFromPart());
 
 			int result = st.executeUpdate();
 			return result > 0 ? 1 : 0;
 
 		} catch (SQLException | ClassNotFoundException ex) {
-			ex.printStackTrace(); // Log the exception for debugging
+			ex.printStackTrace(); 
 			return -1;
 		}
-
-		/**
-		 * - connection ---> Prepared Statement query execute return List<product>
-		 */
 	}
 
 	public int getUserInfo(String username, String password) {
@@ -129,7 +122,6 @@ public class DatabaseController {
 				user.setEmail(result.getString("email"));
 				user.setUsername(result.getString("username"));
 				user.setPassword(result.getString("password"));
-				user.setUserImageUrlFromPart(result.getString("userImage"));
 			}
 			return user;
 
@@ -293,6 +285,34 @@ public class DatabaseController {
 		}
 
 	}
+	
+	public int addToCart(CartModel cartItem) {
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement("INSERT INTO cartproductdetails (cartID, productID, cartProductQuantity, cartLineTotal) VALUES (?, ?, ?, ?)");
+			st.setInt(1, cartItem.getCartID());
+	        st.setInt(2, cartItem.getProductID());
+	        st.setInt(3, cartItem.getCartProductQuantity());
+	        st.setDouble(4, cartItem.getCartLineTotal());
+	        
+	        int result = st.executeUpdate();
+	        
+			return result > 0 ? 1 : 0;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace(); // Log the exception for debugging
+			return -1;
+		}
+	}
+	
+    public void updateProductStock(ProductModel product) {
+        try (Connection con = getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE products SET stock = ? WHERE productID = ?");
+            ps.setInt(1, product.getStock());
+            ps.setInt(2, product.getProductID());
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 	// Carts
 
@@ -366,6 +386,43 @@ public class DatabaseController {
 		}
 	}
 	
+	public int addOrder(OrderModel order) {
+        try (Connection con = getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO orders (orderDate, orderTotal, username, orderStatus) VALUES (?, ?, ?, ?)");
+            ps.setDate(1, new java.sql.Date(order.getOrderDate().getTime()));
+            ps.setDouble(2, order.getOrderTotal());
+            ps.setString(3, order.getUsername());
+            ps.setString(4, order.getOrderStatus());
+            
+            int result = ps.executeUpdate();
+            if (result > 0) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                	System.out.println(generatedKeys.getInt(0));
+                    return generatedKeys.getInt(0); // Return the generated orderID
+                }
+            }
+            return 0;
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return -1; 
+    }
+	
+    public void addOrderProductDetails(OrderModel orderProductDetails) {
+        try (Connection con = getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO orderproductdetails (orderID, productID, orderQuantity, lineTotal) VALUES (?, ?, ?, ?)");
+            ps.setInt(1, orderProductDetails.getOrderID());
+            System.out.println(orderProductDetails.getOrderID());
+            ps.setInt(2, orderProductDetails.getProductID());
+            System.out.println(orderProductDetails.getProductID());
+            ps.setInt(3, orderProductDetails.getOrderQuantity());
+            ps.setDouble(4, orderProductDetails.getLineTotal());
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
 	// Orders
 
 }

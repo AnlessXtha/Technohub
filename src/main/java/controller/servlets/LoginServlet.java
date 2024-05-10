@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if (userType == 0) {
 				request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
-				response.sendRedirect(request.getContextPath() + StringUtils.CUSTOMER_HOME_PAGE);
+				response.sendRedirect(request.getContextPath() + StringUtils.SERVLET_URL_HOME_LIST_PAGE);
 		    } else if (userType == 1) {
 		    	request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.LOGIN_REGISTER_MESSAGE);
 				response.sendRedirect(request.getContextPath() + StringUtils.SERVLET_URL_PRODUCTLIST);

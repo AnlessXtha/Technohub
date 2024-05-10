@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
@@ -9,8 +10,42 @@
 <link rel="stylesheet" type="text/css" href="/TechnoHub/stylesheets/cart.css" />
 </head>
 <body>
+	<% String userSession = (String) session.getAttribute("userName"); %>
+
+	<nav>
+      <div class="navbar">
+        <div class="navLogo">
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
+        </div>
+
+        <div class="navLinksContainer"> 
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
+          <a href="#" class="navLinks">Contact Us</a>
+        </div>
+
+
+        <div class="topRight">
+        <a href="${pageContext.request.contextPath}${StringUtils. SERVLET_URL_CARTDETAILS}"><img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; margin-right: 15px; padding-top: 6px;"></a>
+          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;">
+          <div class ="dropdown">
+            <p class="d" style="font-size: 12px;"><%=userSession%></p>
+            <div class="dropcontent">
+              <a href="#">Profile</a>
+              <a href="#">Log Out</a>
+            </div>
+          </div>
+			<form action= "/TechnoHub/LogoutServlet" method='post'>
+				<button type="submit" class="log-button">Log out</button>
+			</form>
+        </div>
+
+      </div>
+    </nav>
+
     <div class="top">
-        <h1 class="heading">PURCHASE HISTORY <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_CARTDETAILS}">
+        <h1 class="heading">PURCHASE HISTORY 
+        <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_CARTDETAILS}">
             <button class="history-btn" style="margin-left: 357px;">Back to Cart</button>
         </a></h1>
     </div>

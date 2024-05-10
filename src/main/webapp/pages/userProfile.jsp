@@ -57,7 +57,7 @@
 	<div class="container">
 
         <div class="profileimg">
-          <img src ="${pageContext.request.contextPath}/resources/images/users/${user.userImageUrlFromPart}" style="height: 100px;">
+          <img src ="${pageContext.request.contextPath}/resources/images/user.png" style="height: 100px;">
         </div>
         
         <div class="info" style="justify-content: space-evenly ; display: flex;">

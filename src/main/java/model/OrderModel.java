@@ -34,9 +34,8 @@ public class OrderModel {
 	}
 
 
-	public OrderModel(int orderID, Date orderDate, double orderTotal, String username, String orderStatus) {
+	public OrderModel (Date orderDate, double orderTotal, String username, String orderStatus) {
 		super();
-		this.orderID = orderID;
 		this.orderDate = orderDate;
 		this.orderTotal = orderTotal;
 		this.username = username;

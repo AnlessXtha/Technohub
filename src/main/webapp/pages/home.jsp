@@ -16,6 +16,7 @@
 <body>
 	<%
 	String userSession = (String) session.getAttribute("userName");
+	int userTypeSession = (int) session.getAttribute("userType");
 	String cookieUsername = null;
 	String cookieSessionID = null;
 	Cookie[] cookies = request.getCookies();
@@ -33,23 +34,24 @@
 	<nav>
       <div class="navbar">
         <div class="navLogo">
-          <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="./home.jsp" class="navLinks">Home</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
-          <a href="#" class="navLinks">Contact Us</a>
+          <a href="${pageContext.request.contextPath}/pages/aboutUs.jsp" class="navLinks">About Us</a>
+          <a href="${pageContext.request.contextPath}/pages/contactUs.jsp" class="navLinks">Contact Us</a>
         </div>
 
 
         <div class="topRight">
-          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;"></i></a>
+        <a href="${pageContext.request.contextPath}${StringUtils. SERVLET_URL_CARTDETAILS}"><img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; margin-right: 15px; padding-top: 6px;"></a>
+          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;">
           <div class ="dropdown">
             <p class="d" style="font-size: 12px;"><%=userSession%></p>
             <div class="dropcontent">
-              <a href="#">Profile</a>
-              <a href="#">Log Out</a>
+              <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_USERPROFILE}">Profile</a>
             </div>
           </div>
 			<form action= "/TechnoHub/LogoutServlet" method='post'>
@@ -60,33 +62,8 @@
       </div>
     </nav>
 	
-<%-- 	<div class="heading">
-		<h1>Welcome to the Customer Home page</h1>
-		<a
-			href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_USERPROFILE}"><button>View
-				Profile</button></a>
-	</div>
-
-	<div class="welcome-container">
-		<h1>
-			Hello
-			<%=cookieUsername%>. Welcome to Admin Dashboard page!
-		</h1>
-		<h3>
-			Cookie session Id is
-			<%=cookieSessionID%></h3>
-		<p>
-			Session username:
-			<%=userSession%></p>
-		<a href="${pageContext.request.contextPath}/index.jsp">
-			<button class="home-button">Continue to Home Page</button>
-		</a>
-
-	</div>
-	 --%>
 	 
 	 <section  class="home" style = "background:url(${pageContext.request.contextPath}/resources/images/razerviper.jpg) no-repeat; background-size: cover; background-position: center;">
-      <!-- code for the big Bonsai text and the  -->
       <div class="content" style="max-width: 800px; padding: 30px;">
 
           <span style= "font-size: 32px; padding:16px 0; line-height: 1; color:#FFFFFF;">NEW R A Z E R VIPER V3</span>

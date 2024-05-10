@@ -36,7 +36,7 @@ public class HomeListServlet extends HttpServlet {
         // TODO Auto-generated method stub
         List<ProductModel> productsListCustomer= databaseController.getAllProductsInfo();
         request.setAttribute("productsListCustomer", productsListCustomer);
-        request.getRequestDispatcher(StringUtils.URL_CUSTOMER_HOME).forward(request, response);
+        request.getRequestDispatcher(StringUtils.HOME_LIST_PAGE).forward(request, response);
     }
 
     /**

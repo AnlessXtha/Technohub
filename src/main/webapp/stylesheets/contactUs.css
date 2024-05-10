@@ -1,0 +1,75 @@
+@charset "ISO-8859-1";
+
+.btn{
+  background-color: green; 
+  border: none;
+  color: white;
+  padding: 13px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.container{
+  width: 100%;
+  margin-top: 100px;
+  background-position-y: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container form{
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.inputform{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  position: relative;
+}
+
+.inputform label{
+  flex-basis: 28%;
+}
+
+.inputform input, .input-group textarea{
+  flex-basis: 68%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #999;
+  color: #333;
+  font-size: 16px;
+}
+
+.formbtn{
+  background-color: #8CB59C;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  display: block;
+  margin: 30px auto 10px;
+  font-size: 16px;
+}
+
+.formbtn:hover {
+  background-color: #415224;
+  color: white;
+}

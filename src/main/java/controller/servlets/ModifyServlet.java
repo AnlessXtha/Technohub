@@ -15,9 +15,6 @@ import controller.database.DatabaseController;
 import model.ProductModel;
 import util.StringUtils;
 
-/**
- * Servlet implementation class ModifyServlet
- */
 @WebServlet(asyncSupported = true, urlPatterns = { StringUtils.SERVLET_URL_UPDATE})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, 
 maxFileSize = 1024 * 1024 * 10, 
@@ -26,12 +23,9 @@ public class ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	DatabaseController databaseController= new DatabaseController(); 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ModifyServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	System.out.println("put triggered in do get modify");

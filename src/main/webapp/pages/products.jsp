@@ -38,24 +38,24 @@
 	<nav>
       <div class="navbar">
         <div class="navLogo">
-          <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="${pageContext.request.contextPath}/pages/home.jsp" class="navLinks">Home</a>
-          <a href="./pages/products.jsp" class="navLinks">Products</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
           <a href="#" class="navLinks">Contact Us</a>
         </div>
 
 
         <div class="topRight">
-        	<div class ="dropdown" style="display:flex; align-items: center">
-	          	<img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;"></i></a>
-	          
-	            <p class="d" style="font-size: 12px;"><%=userSession%></p></a>
-	            <div class="dropcontent">
-	              <a href="#">Profile</a>
-	              <a href="#">Log Out</a>
+        <a href="${pageContext.request.contextPath}${StringUtils. SERVLET_URL_CARTDETAILS}"><img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; margin-right: 15px; padding-top: 6px;"></i></a>
+          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;"></i></a>
+          <div class ="dropdown">
+            <p class="d" style="font-size: 12px;"><%=userSession%></p>
+            <div class="dropcontent">
+              <a href="#">Profile</a>
+              <a href="#">Log Out</a>
             </div>
           </div>
 			<form action= "/TechnoHub/LogoutServlet" method='post'>
@@ -65,7 +65,7 @@
 
       </div>
     </nav>
-    
+	    
     
 	<div class = top>
       <div class="searchbar">
@@ -84,7 +84,7 @@
 		<c:forEach var="product" items="${productsListCustomer}">
         <!--1st Product-->
         <div class="col-3">
-          <a href="pages/learnmore.html"><img src="${pageContext.request.contextPath}/resources/images/products/${product.productImageUrlFromPart}" style="width:225px; height:225px"/></a>
+          <img src="${pageContext.request.contextPath}/resources/images/products/${product.productImageUrlFromPart}" style="width:225px; height:225px"/>
           <h3>${product.productName}</h3>
           <p>${product.productDescription}</p>
           <div class="price">Rs. ${product.unitPrice}</div>
