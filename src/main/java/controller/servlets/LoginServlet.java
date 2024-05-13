@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(loginResult);
 	    
 	    int userType = dbController.checkUserType(userName);
-	    System.out.println(userType);
+	    System.out.println("this"+userType);
 	    
 	    int cartID = dbController.getCurrentCartID(userName);
 	    

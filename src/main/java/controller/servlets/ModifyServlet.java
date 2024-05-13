@@ -76,6 +76,7 @@ public class ModifyServlet extends HttpServlet {
 		
 		ProductModel productModel = new ProductModel(productName, productDescription, productCategory,
                 stock, unitPrice, productImagePart);
+		
 		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH_PRODUCT;
 	    String fileName = productModel.getProductImageUrlFromPart();
 	    if(!fileName.isEmpty() && fileName != null)

@@ -61,11 +61,16 @@ public class CheckoutServlet extends HttpServlet {
 		            int productID = cartProduct.getProductID();
 		            int orderQuantity = cartProduct.getCartProductQuantity();
 		            double lineTotal = cartProduct.getCartLineTotal();
-		            addOrderProductDetails(orderID, productID, orderQuantity, lineTotal);
-		            updateProductStock(productID, orderQuantity);
+		            if (orderID == 1) {
+		            	int latestOrderID = databaseController.getLatestOrderIDFromDatabase();
+		            	System.out.println("latestOrderID" + latestOrderID);
+		            	addOrderProductDetails(latestOrderID, productID, orderQuantity, lineTotal);		            	
+		            	updateProductStock(productID, orderQuantity);
+		            }
 		        }
 		        
-		        request.getSession().removeAttribute("cartProductsList");
+	            databaseController.clearCart(cartID);
+
 		        response.sendRedirect(request.getContextPath() + StringUtils.SERVLET_URL_ORDERDETAILS);
 		    } catch (Exception e) {
 		        e.printStackTrace();

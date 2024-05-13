@@ -24,6 +24,17 @@ public class StringUtils {
     
     public static final String GET_SINGLE_USER_INFO = "SELECT * FROM user WHERE username = ?";
     
+	public static final String QUERY_UPDATE_PROFILE = "UPDATE user " +
+            "SET " +
+            "    firstName = ?, " +
+            "    lastName = ?, " +
+            "    address = ?, " +
+            "    contactNumber = ?, " +
+            "    email = ?, " +
+            "    username = ? " +
+            "WHERE " +
+            "    username = ?;";
+    
     // User Validation
 	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user WHERE username = ?";
 	public static final String GET_CONTACT_NUMBER = "SELECT COUNT(*) FROM user WHERE contactNumber = ?";
@@ -72,6 +83,8 @@ public class StringUtils {
     	    "    cpd.cartID = ?";
        
     public static final String REMOVE_PRODUCT_FROM_CART = "DELETE FROM cartproductdetails WHERE productID = ?";
+    
+    public static final String CLEAR_CART = "DELETE FROM cartproductdetails WHERE cartID = ?";
 	
     // For Orders
     
@@ -157,7 +170,6 @@ public class StringUtils {
     public static final String URL_ADD_PRODUCT = "/addProduct.jsp";
     public static final String URL_EDIT_USER_PROFILE = "/editProfile.jsp";
 
-	/* public static final String URL_INDEX = "/index.jsp"; */
     
     // JSP route
     

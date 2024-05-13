@@ -21,7 +21,7 @@ href="/TechnoHub/stylesheets/aboutUs.css" />
 href="/TechnoHub/stylesheets/navigation.css" /> 
     
   </head>
-     <%
+     	<%
 	String userSession = (String) session.getAttribute("userName");
 	int userTypeSession = (int) session.getAttribute("userType");
 	String cookieUsername = null;
@@ -45,11 +45,18 @@ href="/TechnoHub/stylesheets/navigation.css" />
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+	        <c:if test="<%= userTypeSession == 0 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+			</c:if>
+			<c:if test="<%= userTypeSession == 1 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
+			</c:if>
+        
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
           <a href="${pageContext.request.contextPath}/pages/aboutUs.jsp" class="navLinks">About Us</a>
           <a href="${pageContext.request.contextPath}/pages/contactUs.jsp" class="navLinks">Contact Us</a>
         </div>
+
 
 
         <div class="topRight">
@@ -58,8 +65,7 @@ href="/TechnoHub/stylesheets/navigation.css" />
           <div class ="dropdown">
             <p class="d" style="font-size: 12px;"><%=userSession%></p>
             <div class="dropcontent">
-              <a href="#">Profile</a>
-              <a href="#">Log Out</a>
+              <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_USERPROFILE}">Profile</a>
             </div>
           </div>
 			<form action= "/TechnoHub/LogoutServlet" method='post'>

@@ -25,17 +25,28 @@ String contextPath = request.getContextPath();
 </head>
 <body>
 
+	<% String usernameSession = (String) session.getAttribute("userName"); %>
+	<% int userTypeSession = (int) session.getAttribute("userType"); %>
+	
 	<nav>
       <div class="navbar">
         <div class="navLogo">
-          <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="${pageContext.request.contextPath}/${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
-          <a href="#" class="navLinks">Products</a>
-          <a href="#" class="navLinks">Contact Us</a>
+	        <c:if test="<%= userTypeSession == 0 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+			</c:if>
+			<c:if test="<%= userTypeSession == 1 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
+			</c:if>
+        
+          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
+          <a href="${pageContext.request.contextPath}/pages/aboutUs.jsp" class="navLinks">About Us</a>
+          <a href="${pageContext.request.contextPath}/pages/contactUs.jsp" class="navLinks">Contact Us</a>
         </div>
+
 
 
         <div class="topRight">

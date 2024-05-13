@@ -20,8 +20,9 @@
 </head>
 <body>
 
-	<%
+		<%
 	String userSession = (String) session.getAttribute("userName");
+	int userTypeSession = (int) session.getAttribute("userType");
 	String cookieUsername = null;
 	String cookieSessionID = null;
 	Cookie[] cookies = request.getCookies();
@@ -34,7 +35,8 @@
 		}
 	}
 	%>
-
+	
+	
 	<nav>
       <div class="navbar">
         <div class="navLogo">
@@ -42,20 +44,26 @@
         </div>
 
         <div class="navLinksContainer"> 
-          <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+	        <c:if test="<%= userTypeSession == 0 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
+			</c:if>
+			<c:if test="<%= userTypeSession == 1 %>">
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
+			</c:if>
+        
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>
-          <a href="#" class="navLinks">Contact Us</a>
+          <a href="${pageContext.request.contextPath}/pages/aboutUs.jsp" class="navLinks">About Us</a>
+          <a href="${pageContext.request.contextPath}/pages/contactUs.jsp" class="navLinks">Contact Us</a>
         </div>
 
 
         <div class="topRight">
-        <a href="${pageContext.request.contextPath}${StringUtils. SERVLET_URL_CARTDETAILS}"><img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; margin-right: 15px; padding-top: 6px;"></i></a>
-          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;"></i></a>
+        <a href="${pageContext.request.contextPath}${StringUtils. SERVLET_URL_CARTDETAILS}"><img src="${pageContext.request.contextPath}/resources/images/navigation/cart.png" alt="Cart" style="width: 30px; margin-right: 15px; padding-top: 6px;"></a>
+          <img src="${pageContext.request.contextPath}/resources/images/navigation/user.png" alt="Admin" style="width: 37px;">
           <div class ="dropdown">
             <p class="d" style="font-size: 12px;"><%=userSession%></p>
             <div class="dropcontent">
-              <a href="#">Profile</a>
-              <a href="#">Log Out</a>
+              <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_USERPROFILE}">Profile</a>
             </div>
           </div>
 			<form action= "/TechnoHub/LogoutServlet" method='post'>
@@ -106,13 +114,13 @@
 
   <!-- footer section starts -->
     <footer class = "footer">
-      division class seperated for logo
+      <!-- division class seperated for logo -->
       <div class="column1">
-        <img src = "../images/technohublogo.png" style = "height: 50px;">
+        <img src = "${pageContext.request.contextPath}/resources/images/technohublogo.png" style = "height: 50px;">
         <br><br>
         <span class="copyright"> &copy; 2023 TECHNOHUB </span>
       </div>
-      newsletter code footer
+      <!-- newsletter code footer -->
       <div class="column2">
         <h3>NEWSLETTER</h3>
         <form class="newsletter">
@@ -121,16 +129,16 @@
           <button type = "submit">Subscribe</button>
         </form> 
       </div>
-      contact us code for footer
+      <!-- contact us code for footer -->
       <div class="column3">
-        <a href = "../pages/contact.html" style="text-decoration: none; color:#D1EFEF"><h3>CONTACT US</h3></a>
+        <a href = "${pageContext.request.contextPath}/pages/contact.jsp" style="text-decoration: none; color:#D1EFEF"><h3>CONTACT US</h3></a>
         <p>cs.tech@technohub.com<br> Basundhara, Kathmandu, NP</p>
         <br>
         <div class = "social">
           <h3>FOLLOW US</h3>
-          <i class ="facebook-icon"><img src="../images/facebook.png" alt="facebook" style="width: 40px;"></i></a>
-          <i class ="instagram-icon"><img src="../images/instagram.png" alt="instagram" style="width: 40px;"></i></a>
-          <i class ="twitter-icon"><img src="../images/twitter.png" alt="twitter" style="width: 40px;"></i></a>
+          <i class ="facebook-icon"><img src="${pageContext.request.contextPath}/resources/images/facebook.png" alt="facebook" style="width: 40px;"></i></a>
+          <i class ="instagram-icon"><img src="${pageContext.request.contextPath}/resources/images/instagram.png" alt="instagram" style="width: 40px;"></i></a>
+          <i class ="twitter-icon"><img src="${pageContext.request.contextPath}/resources/images/twitter.png" alt="twitter" style="width: 40px;"></i></a>
         </div>
       </div>
     </footer>

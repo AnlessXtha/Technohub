@@ -182,6 +182,25 @@ public class DatabaseController {
 		}
 	}
 
+	public int updateProfileInfo(UserModel userModel, String username) {
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement(StringUtils.QUERY_UPDATE_PROFILE);
+			st.setString(1, userModel.getFirstName());
+			st.setString(2, userModel.getLastName());
+			st.setString(3, userModel.getAddress());
+			st.setString(4, userModel.getContactNumber());
+			st.setString(5, userModel.getEmail());
+			st.setString(6, userModel.getUsername());
+			st.setString(7, userModel.getUsername());
+
+			int result = st.executeUpdate();
+			return result > 0 ? 1 : 0;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace(); // Log the exception for debugging
+			return -1;
+		}
+	}
+	
 	// Products
 
 	public int addProduct(ProductModel productModel) {
@@ -352,8 +371,18 @@ public class DatabaseController {
 			ex.printStackTrace(); // Log the exception for debugging
 			return -1;
 		}
-
 	}
+	
+	public void clearCart(int cartID) {
+	    try (Connection con = getConnection()) {
+	        PreparedStatement stmt = con.prepareStatement(StringUtils.CLEAR_CART);
+	        stmt.setInt(1, cartID);
+	        stmt.executeUpdate();
+	    } catch (SQLException | ClassNotFoundException ex) {
+	        ex.printStackTrace();
+	    }
+	}
+	
 	// Carts
 	
 	// Orders
@@ -395,14 +424,7 @@ public class DatabaseController {
             ps.setString(4, order.getOrderStatus());
             
             int result = ps.executeUpdate();
-            if (result > 0) {
-                ResultSet generatedKeys = ps.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                	System.out.println(generatedKeys.getInt(0));
-                    return generatedKeys.getInt(0); // Return the generated orderID
-                }
-            }
-            return 0;
+            return result > 0 ? 1 : 0;
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -423,6 +445,26 @@ public class DatabaseController {
             ex.printStackTrace();
         }
     }
+    
+
+
+    public int getLatestOrderIDFromDatabase() {
+	     int latestOrderID = -1;
+	     ResultSet resultSet = null;
+	     
+	     try (Connection con = getConnection()){
+	         PreparedStatement ps = con.prepareStatement("SELECT MAX(orderID) AS latestOrderID FROM `orders`;");
+	         resultSet = ps.executeQuery();
+	
+	         if (resultSet.next()) {
+	             latestOrderID = resultSet.getInt("latestOrderID");
+	         }
+	     } catch (SQLException | ClassNotFoundException ex) {
+	         ex.printStackTrace();
+	     } 
+	     
+	     return latestOrderID;
+	 }
 	// Orders
 
 }
