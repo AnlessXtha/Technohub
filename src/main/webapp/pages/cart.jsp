@@ -105,7 +105,7 @@
 								action="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_MODIFYCART}">
 								<input type="hidden" name="<%=StringUtils.REMOVE_ID %>"
 									value="${cartProduct.productID}" />
-								<button type="button"
+								<button type="submit"
 									onclick="confirmDelete('${cartProduct.productName}')"
 									class="remove-btn">Remove</button>
 							</form>
@@ -127,7 +127,7 @@
 					value="${cartProduct.productID}" />				
 			</c:forEach>
 
-			<button type="button" onclick="checkout()" class="checkout-btn">Checkout</button>
+			<button type="submit" onclick="checkout()" class="checkout-btn">Checkout</button>
 		</form>
 	</div>
 
@@ -141,16 +141,11 @@
 		}
 	}
 
-    function checkout() {
-        var cartProductsList = ${cartProductsList};
-
-        if (cartProductsList.length === 0) {
-            alert("Your cart is empty. Please add products to proceed to checkout.");
-        } else {
-            if (confirm("Are you sure you want to checkout?")) {
-                document.getElementById("checkoutForm").submit();
-            }
-        }
+	function checkout() {
+		if (confirm("Are you sure you want to checkout?")) {
+			document.getElementById("checkoutForm").submit();
+		}
+	}
     }
 </script>
 </html>

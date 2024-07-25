@@ -31,7 +31,7 @@
 	%>
 	
 	
-	<nav>
+<nav>
       <div class="navbar">
         <div class="navLogo">
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}"><img src="${pageContext.request.contextPath}/resources/images/navigation/technohublogo.png" width="100px;"></a>
@@ -42,7 +42,7 @@
 			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_HOME_LIST_PAGE}" class="navLinks">Home</a>
 			</c:if>
 			<c:if test="<%= userTypeSession == 1 %>">
-			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_ADMIN_DASHBOARD}" class="navLinks">Dashboard</a>
+			    <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLIST}" class="navLinks">Dashboard</a>
 			</c:if>
         
           <a href="${pageContext.request.contextPath}${StringUtils.SERVLET_URL_PRODUCTLISTCUSTOMER}" class="navLinks">Products</a>

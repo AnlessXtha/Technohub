@@ -52,9 +52,6 @@ public class AddProductServlet extends HttpServlet {
 		int unitPrice = Integer.parseInt(request.getParameter("unitPrice"));
 		Part productImagePart = request.getPart("productImage");
 		
-		System.out.println("productName value:" + productName);
-		System.out.println("productDescription value:" + productDescription);
-		
 		ProductModel productModel = new ProductModel (productName, productDescription, productCategory,
 				stock, unitPrice, productImagePart);
 		
